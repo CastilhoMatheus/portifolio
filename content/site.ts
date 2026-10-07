@@ -7,6 +7,7 @@ export const site = {
 
   name: "Matheus Vinicios de Castilho",
   shortName: "Matheus",
+  lastName: "Castilho",
   tagline: "I build things for the web — with logic you can see.",
   role: "Full-stack Developer",
   location: "Dublin, Ireland · from Santa Catarina, Brazil",
