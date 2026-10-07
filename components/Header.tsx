@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Container from "@/components/Container";
 import NavLinks from "@/components/NavLinks";
+import ThemeToggle from "@/components/ThemeToggle";
 import { site } from "@/content/site";
 
 export default function Header() {
@@ -14,7 +15,10 @@ export default function Header() {
           {site.shortName}
         </Link>
 
-        <NavLinks />
+        <div className="flex items-center gap-6">
+          <NavLinks />
+          <ThemeToggle />
+        </div>
       </Container>
     </header>
   );

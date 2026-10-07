@@ -2,6 +2,7 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { site } from "@/content/site";
 import type { Metadata } from "next";
+import { ThemeProvider } from "next-themes";
 import { Gabarito, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -31,14 +32,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
+    // next-themes sets the "dark" class on <html> before React hydrates, so the
+    // server and client class lists differ on purpose
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${gabarito.variable} ${jetBrainsMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <ThemeProvider attribute="class" disableTransitionOnChange>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );
