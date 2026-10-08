@@ -12,6 +12,7 @@
   --gold: #ffdf00; /* Brazil yellow: highlights only, not text on light bg */
   --blue: #002776; /* Brazil blue */
   --orange: #ff883e; /* Irish orange: graphics only, not text on light bg */
+  --danger: #b3261e; /* form errors */
 }
 
 .dark {
@@ -23,6 +24,7 @@
   --gold: #ffdf00;
   --blue: #7fa2ff;
   --orange: #ff883e;
+  --danger: #ff8a80;
 }
 
 /* Expose the variables as Tailwind utilities: bg-bg, text-primary, border-muted, … */
@@ -35,6 +37,7 @@
   --color-gold: var(--gold);
   --color-blue: var(--blue);
   --color-orange: var(--orange);
+  --color-danger: var(--danger);
 
   --font-sans: var(--font-gabarito); /* default font for everything */
   --font-display: var(--font-gabarito);
