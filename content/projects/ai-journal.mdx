@@ -1,0 +1,46 @@
+---
+title: "AI Journal"
+summary: "A journal that reads along with you: every entry gets a mood, a summary and a sentiment score. Built following Scott Moss's course on Frontend Masters."
+year: 2025
+stack:
+  [
+    "Next.js",
+    "TypeScript",
+    "LangChain",
+    "OpenAI",
+    "Prisma",
+    "PostgreSQL",
+    "Clerk",
+    "Recharts",
+  ]
+repo: "https://github.com/CastilhoMatheus/ai-fullstack-journal"
+featured: true
+order: 1
+---
+
+> I built this app while following [Build an AI-Powered Fullstack Next.js App, v3](https://frontendmasters.com/courses/fullstack-app-next-v3/) by **Scott Moss** on Frontend Masters. The idea and architecture come from the course; this write-up covers what I learned building it.
+
+## What it does
+
+You write journal entries like in any notes app, and the app saves as you type. In the background, each entry is analysed by an LLM, which returns:
+
+- a **mood** and a short **summary** of the entry,
+- a **sentiment score** from -10 to 10,
+- a **colour** that represents the mood, used to tint the entry in the UI.
+
+A history page charts your sentiment over time, so you can see good and bad weeks at a glance.
+
+## Asking questions about your own journal
+
+The part I enjoyed most: you can ask things like _"when was I most stressed about exams?"_ and get an answer drawn from your own entries.
+
+Under the hood, the entries are turned into embeddings and placed in a vector store. The relevant ones are retrieved and passed to the model through a LangChain refine chain, which builds the answer entry by entry. It was my first time working with <Highlight>retrieval-augmented generation</Highlight>, and it made embeddings click for me.
+
+## Keeping the AI output reliable
+
+LLMs don't always return what you ask for. The expected shape of the analysis is defined with **Zod** and enforced by LangChain's structured output parser, so a malformed response is caught instead of being saved to the database. All model calls happen on the server, so API keys never reach the browser.
+
+## Where I'd take it beyond the course
+
+- Store embeddings in Postgres (pgvector) instead of building the vector store per question, so Q&A stays fast as the journal grows.
+- Stream the analysis back to the UI instead of waiting for the full response.

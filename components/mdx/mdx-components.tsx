@@ -43,6 +43,13 @@ export const mdxComponents: MDXComponents = {
       {...props}
     />
   ),
+  // Used for notes and credits, e.g. "built following X's course"
+  blockquote: (props) => (
+    <blockquote
+      className="border-gold bg-surface text-muted [&_a]:text-primary rounded-r-lg border-l-4 px-5 py-4 text-base"
+      {...props}
+    />
+  ),
   Highlight,
   Porco,
 };

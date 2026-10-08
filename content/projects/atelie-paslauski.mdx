@@ -1,0 +1,26 @@
+---
+title: "Ateliê Paslauski"
+summary: "A website for an art studio: a catalogue of artworks with fast, image-heavy galleries, detail pages and a cart."
+year: 2025
+stack: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Cloudinary"]
+repo: "https://github.com/CastilhoMatheus/ateliepaslauski"
+featured: true
+order: 4
+---
+
+## What it does
+
+The site presents the studio's artworks: a gallery on the home page, a page for each piece with its details and price, a cart, and about and contact pages.
+
+## Images without the weight
+
+An art site is mostly images, and big images make slow pages. All artwork images are stored on **Cloudinary**, which resizes and optimises them on the fly, so each visitor downloads an image sized for their screen. I also wrote a small script that syncs the Cloudinary library with the catalogue in the database, so the two never drift apart.
+
+## Static pages that actually build
+
+The artworks are stored in Postgres and modelled with Prisma. Each artwork page is generated at build time with `generateStaticParams`. Getting data fetching right at build time on Vercel took some debugging, but the result is pages that load instantly.
+
+## What I'd improve
+
+- An admin area so the studio can add and edit artworks without touching code.
+- Checkout, so the cart leads to an actual purchase.

@@ -1,0 +1,39 @@
+---
+title: "AI Quiz Maker"
+summary: "Paste some text or a link and get a multiple-choice quiz generated from it, then play it and track your scores."
+year: 2026
+stack:
+  [
+    "Next.js 16",
+    "TypeScript",
+    "OpenAI",
+    "Zod",
+    "Prisma",
+    "Neon Postgres",
+    "Neon Auth",
+  ]
+repo: "https://github.com/CastilhoMatheus/AI-quiz-maker"
+featured: true
+order: 2
+---
+
+## What it does
+
+You give the app some source material, either text or a URL, and it generates a quiz from it: multiple-choice questions, each with four options, the correct answer and an explanation. You can then play the quiz, and every attempt is saved with its score so you can see how you improve.
+
+## Making generated questions trustworthy
+
+The model's output is validated with **Zod** before anything is saved. Beyond checking the shape, the schema has a rule that <Highlight>the correct answer must be one of the four options</Highlight>. It sounds obvious, but models occasionally break it, and without that check a broken question would make it into a quiz.
+
+## Not paying twice for the same quiz
+
+Each quiz stores a hash of its input, with a unique constraint in the database. If someone submits the same material again, the app can return the existing quiz instead of calling the model again, which saves time and API cost.
+
+## Data model
+
+I designed the Postgres schema with Prisma around three models: `Quiz`, `Question` and `QuizAttempt`. Attempts keep the answers given, the score and timestamps, which is what makes score history possible. The schema evolved over a few migrations as I added quiz descriptions and a draft/published status.
+
+## What I'd improve
+
+- Show per-question stats (which questions people get wrong most).
+- Let users edit a generated question before publishing the quiz.
