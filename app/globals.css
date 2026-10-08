@@ -41,6 +41,18 @@
   --font-mono: var(--font-jetbrains-mono);
 }
 
+/* CSS (not JS) entrance, so content appears as soon as HTML arrives, before hydration */
+@theme {
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+  }
+}
+
 @layer base {
   body {
     @apply bg-bg text-text font-sans;

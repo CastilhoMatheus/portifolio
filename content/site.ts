@@ -22,6 +22,7 @@ export const site = {
     "Next.js",
     "Node.js",
     "PostgreSQL",
+    "python",
     "Algorithms",
   ],
 
