@@ -42,6 +42,7 @@
   --font-sans: var(--font-gabarito); /* default font for everything */
   --font-display: var(--font-gabarito);
   --font-mono: var(--font-jetbrains-mono);
+  --font-irish: var(--font-uncial); /* footer detail only */
 }
 
 /* CSS (not JS) entrance, so content appears as soon as HTML arrives, before hydration */
