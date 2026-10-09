@@ -1,5 +1,5 @@
 export const site = {
-  url: "https://portifolio-kjf4.vercel.app/",
+  url: "https://castilho.dev",
   title: "Matheus Castilho — Software Developer",
   description:
     "Brazilian software developer in Ireland building fast, playful web experiences — and the occasional algorithm you can play with.",
