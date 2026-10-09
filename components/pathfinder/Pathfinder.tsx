@@ -70,8 +70,9 @@ function nameToWalls(rows: number, cols: number): Grid {
   if (!ctx) return grid;
 
   const family = getComputedStyle(document.body).fontFamily;
-  const fit = (text: string) => {
-    let size = Math.floor(rows * 0.62);
+  // `height` = share of the grid's rows the letters may use
+  const fit = (text: string, height: number) => {
+    let size = Math.floor(rows * height);
     ctx.font = `800 ${size}px ${family}`;
     const width = ctx.measureText(text).width;
     if (width > cols * 0.82) size = Math.floor((size * cols * 0.82) / width);
@@ -79,11 +80,11 @@ function nameToWalls(rows: number, cols: number): Grid {
   };
 
   let text = site.shortName.toUpperCase();
-  let size = fit(text);
-  // Too narrow for the full name (phones): use initials
+  let size = fit(text, 0.62);
+  // Too narrow for the full name (phones): use bigger initials instead
   if (size < 8) {
     text = `${site.shortName[0]}${site.lastName[0]}`.toUpperCase();
-    size = fit(text);
+    size = fit(text, 0.72);
   }
 
   ctx.font = `800 ${size}px ${family}`;
@@ -281,12 +282,17 @@ export default function Pathfinder() {
 
     const build = () => {
       const width = container.clientWidth;
-      const cellSize = width < 640 ? 14 : 16;
+      // Phones: smaller cells and a taller grid, so the initials have enough
+      // cells to be readable (a short grid turns letters into blobs)
+      const narrow = width < 640;
+      const cellSize = narrow ? 12 : 16;
       const cols = Math.floor(width / cellSize);
       // Next keeps visited pages mounted but hidden (display: none) for instant
       // back navigation, so the width can drop to 0. Keep the current grid.
       if (cols < 8) return;
-      const rows = Math.min(30, Math.max(14, Math.round(cols * 0.36)));
+      const rows = narrow
+        ? Math.min(26, Math.max(18, Math.round(cols * 0.62)))
+        : Math.min(30, Math.max(14, Math.round(cols * 0.36)));
       if (`${rows}x${cols}` === lastSize) return;
       lastSize = `${rows}x${cols}`;
 
