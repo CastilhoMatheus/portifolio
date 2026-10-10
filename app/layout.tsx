@@ -1,6 +1,7 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { site } from "@/content/site";
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Gabarito, JetBrains_Mono, Uncial_Antiqua } from "next/font/google";
@@ -54,6 +55,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <main className="flex-1">{children}</main>
           <Footer />
         </ThemeProvider>
+        {/* Vercel Web Analytics: cookie-free page views, no consent banner needed */}
+        <Analytics />
       </body>
     </html>
   );

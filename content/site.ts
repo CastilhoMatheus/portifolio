@@ -13,7 +13,6 @@ export const site = {
   location: "Dublin, Ireland · from Santa Catarina, Brazil",
   timezone: "Europe/Dublin",
   status: "Open to new opportunities",
-  email: "matheusvcastilho@gmail.com",
   resumeUrl: "/cv.pdf",
   avatar: "/images/me.jpg",
   skills: [
@@ -36,6 +35,5 @@ export const site = {
   socials: [
     { label: "GitHub", href: "https://github.com/CastilhoMatheus" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/matheuscastilho/" },
-    { label: "Email", href: "mailto:matheusvcastilho@gmail.com" },
   ],
 } as const;
