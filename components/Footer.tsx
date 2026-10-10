@@ -1,4 +1,5 @@
 import { cacheLife } from "next/cache";
+import Link from "next/link";
 import Container from "@/components/Container";
 import { site } from "@/content/site";
 
@@ -9,6 +10,9 @@ async function CurrentYear() {
   cacheLife("days");
   return new Date().getFullYear();
 }
+
+const linkClass =
+  "hover:text-primary focus-visible:outline-primary rounded-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-4";
 
 export default function Footer() {
   return (
@@ -38,24 +42,21 @@ export default function Footer() {
         </div>
 
         <nav aria-label="Social" className="flex flex-wrap gap-6">
-          {site.socials.map((social) => {
-            // mailto: opens the mail app, so a new tab makes no sense there
-            const isExternal = social.href.startsWith("http");
-
-            return (
-              <a
-                key={social.href}
-                href={social.href}
-                {...(isExternal && {
-                  target: "_blank",
-                  rel: "noopener noreferrer",
-                })}
-                className="hover:text-primary focus-visible:outline-primary rounded-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-4"
-              >
-                {social.label}
-              </a>
-            );
-          })}
+          {site.socials.map((social) => (
+            <a
+              key={social.href}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={linkClass}
+            >
+              {social.label}
+            </a>
+          ))}
+          {/* No public email address: messages go through the rate-limited form */}
+          <Link href="/contact" className={linkClass}>
+            Contact
+          </Link>
         </nav>
       </Container>
     </footer>
